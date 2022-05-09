@@ -659,4 +659,6 @@ Wire Wire Line
 Connection ~ 5650 2800
 Wire Wire Line
 	5650 2800 6150 2800
+Text Notes 6900 5800 0    50   ~ 0
+Place J6 or J3 to suit cable routing on all but 1st Cell\n\nPlace J7 on last Cell only
 $EndSCHEMATC
