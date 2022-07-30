@@ -5,7 +5,6 @@
 	Fuse Configuration:
 	
 	BOD - Disabled, when in brown out, the power consumption goes to 100uA vs < 1uA in shutdown sleep mode.
-	Reset Pin - Configured for GPIO mode (Note, this makes the chip no longer reprogrammable without getting hold of a 12V pulse programmer
 	Watchdog - 8k cycles, 8.2 seconds, this code always runs, then sleeps and waits for the watchdog to trigger a reset, there is no "main loop" for power consumption optimization.
 	Startup Time - 16ms
 */
@@ -130,8 +129,7 @@ int main(void)
 			SleepIdle();
 			break;
 		case CellStatusBalancing:
-			//IndicateNoFault();
-			IndicateFault(); //Fault output is going to be used to switch from CC to CV charge, so we want it high as soon as the first cell starts balancing
+			IndicateNoFault();
 			FlashLed(2);
 			SleepIdle();
 			break;
@@ -140,7 +138,7 @@ int main(void)
 			FlashLed(1);
 			break;
 		case CellStatusUnderVoltage:
-			//IndicateFault(); //Fault output is going to be used as a "overcharge indicator", so don't output fault condition for lower limit
+			IndicateFault();
 			break;
 	}
 
