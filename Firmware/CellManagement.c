@@ -5,7 +5,7 @@
 #include "HardwareDefines.h"
 
 #define OVERVOLTAGE_THRESHOLD_MILLIVOLTS 4150
-#define BALANCE_THRESHOLD_MILLIVOLTS 4050
+#define BALANCE_THRESHOLD_MILLIVOLTS 4100
 #define UNDERVOLTAGE_THRESHOLD_MILLIVOLTS 2800
 
 /* 
@@ -13,12 +13,13 @@
 	Under Voltage @ 2.6V -> 2uA Average
 	Running @ 3V -> 2.5uA Average
 	Running @ 4V -> 2.6uA Average
-	Balancing @ 4.1V -> Approximately 700mA with current settings
-	Over voltage @ 4.3V -> Approximately 700mA with current settings
+	Balancing @ 4.1V -> Approximately 120mA with current settings
+	Over voltage @ 4.15V -> Approximately 700mA with current settings
 */
 
 inline void BalanceOn(bool highCurrent)
 {
+	TCA0_SINGLE_CMP0 = 128; //12.5% duty cycle on the balance FET, period around 80ms
 	if (highCurrent)
 	{
 		TCA0_SINGLE_CMP0 = 768; //75% duty cycle on the balance FET, period around 80ms

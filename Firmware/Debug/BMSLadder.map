@@ -211,7 +211,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x2e2
+.text           0x00000000      0x2fe
  *(.vectors)
  .vectors       0x00000000       0x34 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.8.332/gcc/dev/attiny202/avrxmega3/short-calls/crtattiny202.o
                 0x00000000                __vector_default
@@ -322,42 +322,42 @@ END GROUP
                 0x000000ae       0x3a CellManagement.o
                 0x000000ae                CellVoltage
  .text.ManageCell
-                0x000000e8       0x7a CellManagement.o
+                0x000000e8       0x8e CellManagement.o
                 0x000000e8                ManageCell
  .text.InitializeIO
-                0x00000162       0x14 main.o
-                0x00000162                InitializeIO
+                0x00000176       0x14 main.o
+                0x00000176                InitializeIO
  .text.InitializeBalancePWM
-                0x00000176       0x2a main.o
-                0x00000176                InitializeBalancePWM
+                0x0000018a       0x2a main.o
+                0x0000018a                InitializeBalancePWM
  .text.SleepDeep
-                0x000001a0        0xa main.o
-                0x000001a0                SleepDeep
+                0x000001b4        0xa main.o
+                0x000001b4                SleepDeep
  .text.SleepIdle
-                0x000001aa        0xa main.o
-                0x000001aa                SleepIdle
+                0x000001be        0xa main.o
+                0x000001be                SleepIdle
  .text.ConfigureFaultOutput
-                0x000001b4       0x10 main.o
-                0x000001b4                ConfigureFaultOutput
+                0x000001c8       0x10 main.o
+                0x000001c8                ConfigureFaultOutput
  .text.FlashLed
-                0x000001c4       0x3c main.o
-                0x000001c4                FlashLed
- .text.main     0x00000200       0x62 main.o
-                0x00000200                main
+                0x000001d8       0x3c main.o
+                0x000001d8                FlashLed
+ .text.main     0x00000214       0x6a main.o
+                0x00000214                main
  .text.libgcc.div
-                0x00000262       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_divmodsi4.o)
-                0x00000262                __divmodsi4
+                0x0000027e       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_divmodsi4.o)
+                0x0000027e                __divmodsi4
  .text.libgcc.div
-                0x0000028a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_negsi2.o)
-                0x0000028a                __negsi2
+                0x000002a6       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_negsi2.o)
+                0x000002a6                __negsi2
  .text.libgcc.div
-                0x0000029a       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_udivmodsi4.o)
-                0x0000029a                __udivmodsi4
-                0x000002de                . = ALIGN (0x2)
+                0x000002b6       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_udivmodsi4.o)
+                0x000002b6                __udivmodsi4
+                0x000002fa                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000002de        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_exit.o)
-                0x000002de                _exit
-                0x000002de                exit
+ .fini9         0x000002fa        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_exit.o)
+                0x000002fa                _exit
+                0x000002fa                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -376,16 +376,16 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000002de        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_exit.o)
+ .fini0         0x000002fa        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3/short-calls\libgcc.a(_exit.o)
  *(.fini0)
-                0x000002e2                _etext = .
+                0x000002fe                _etext = .
 
 .rodata
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.r*)
 
-.data           0x00803f80        0x0 load address 0x000002e2
+.data           0x00803f80        0x0 load address 0x000002fe
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -400,8 +400,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
-                0x000002e2                __data_load_start = LOADADDR (.data)
-                0x000002e2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000002fe                __data_load_start = LOADADDR (.data)
+                0x000002fe                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00803f80        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -486,12 +486,12 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1e0c
+.debug_info     0x00000000     0x1e1b
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x11d6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.8.332/gcc/dev/attiny202/avrxmega3/short-calls/crtattiny202.o
  .debug_info    0x000011d6      0x536 adc.o
  .debug_info    0x0000170c      0x2c7 CellManagement.o
- .debug_info    0x000019d3      0x439 main.o
+ .debug_info    0x000019d3      0x448 main.o
 
 .debug_abbrev   0x00000000     0x1593
  *(.debug_abbrev)
@@ -500,12 +500,12 @@ END GROUP
  .debug_abbrev  0x000012a6      0x13e CellManagement.o
  .debug_abbrev  0x000013e4      0x1af main.o
 
-.debug_line     0x00000000      0x7a3
+.debug_line     0x00000000      0x7bc
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x136 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.8.332/gcc/dev/attiny202/avrxmega3/short-calls/crtattiny202.o
  .debug_line    0x00000136      0x1db adc.o
- .debug_line    0x00000311      0x1b0 CellManagement.o
- .debug_line    0x000004c1      0x2e2 main.o
+ .debug_line    0x00000311      0x1bc CellManagement.o
+ .debug_line    0x000004cd      0x2ef main.o
 
 .debug_frame    0x00000000      0x17c
  *(.debug_frame)
@@ -513,21 +513,21 @@ END GROUP
  .debug_frame   0x00000094       0x54 CellManagement.o
  .debug_frame   0x000000e8       0x94 main.o
 
-.debug_str      0x00000000     0x11ec
+.debug_str      0x00000000     0x1211
  *(.debug_str)
  .debug_str     0x00000000      0x7a9 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.8.332/gcc/dev/attiny202/avrxmega3/short-calls/crtattiny202.o
  .debug_str     0x000007a9      0x5d5 adc.o
                                 0x609 (size before relaxing)
- .debug_str     0x00000d7e       0xe3 CellManagement.o
-                                0x3de (size before relaxing)
- .debug_str     0x00000e61      0x38b main.o
-                                0x56f (size before relaxing)
+ .debug_str     0x00000d7e      0x108 CellManagement.o
+                                0x3dd (size before relaxing)
+ .debug_str     0x00000e86      0x38b main.o
+                                0x56e (size before relaxing)
 
-.debug_loc      0x00000000      0x2b3
+.debug_loc      0x00000000      0x2be
  *(.debug_loc)
  .debug_loc     0x00000000       0x4e adc.o
  .debug_loc     0x0000004e      0x132 CellManagement.o
- .debug_loc     0x00000180      0x133 main.o
+ .debug_loc     0x00000180      0x13e main.o
 
 .debug_macinfo
  *(.debug_macinfo)
