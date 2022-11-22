@@ -7,6 +7,13 @@ Most parts are over specified, however I worry that having the microcontroller p
 
 Be warned.
 
+History:
+
+v1.1 (ongoing)
+- incorporate uC pin swap mod
+- improve connections
+
+v1.0 Initial test production run. Mostly works. If you ever get one of these boards, check to see the modification is done to swap FAULT and EN pins.
 
 Application: KiCad
 Version: (5.1.10-1-10_14), release build
