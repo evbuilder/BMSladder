@@ -120,7 +120,7 @@ $EndComp
 Wire Wire Line
 	3950 3250 3950 3400
 Wire Wire Line
-	6150 3250 6150 1950
+	5950 3250 5950 1950
 Wire Wire Line
 	5200 3250 5200 4350
 Wire Wire Line
@@ -220,9 +220,9 @@ Wire Wire Line
 Wire Wire Line
 	5500 3550 5500 3600
 Wire Wire Line
-	5500 3600 6150 3600
+	5500 3600 5950 3600
 Wire Wire Line
-	6150 3600 6150 3550
+	5950 3600 5950 3550
 Wire Wire Line
 	7050 4000 7050 4050
 Wire Wire Line
@@ -281,23 +281,23 @@ $EndComp
 $Comp
 L Device:R R9
 U 1 1 619AAA79
-P 6800 4050
-F 0 "R9" V 6593 4050 50  0000 C CNN
-F 1 "220k" V 6684 4050 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 6730 4050 50  0001 C CNN
-F 3 "~" H 6800 4050 50  0001 C CNN
-	1    6800 4050
+P 6200 4050
+F 0 "R9" V 5993 4050 50  0000 C CNN
+F 1 "220k" V 6084 4050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6130 4050 50  0001 C CNN
+F 3 "~" H 6200 4050 50  0001 C CNN
+	1    6200 4050
 	0    1    1    0   
 $EndComp
 $Comp
 L Device:R R6
 U 1 1 619AB3DF
-P 6150 3400
-F 0 "R6" H 6080 3354 50  0000 R CNN
-F 1 "150k" H 6080 3445 50  0000 R CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 6080 3400 50  0001 C CNN
-F 3 "~" H 6150 3400 50  0001 C CNN
-	1    6150 3400
+P 5950 3400
+F 0 "R6" H 5880 3354 50  0000 R CNN
+F 1 "150k" H 5880 3445 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5880 3400 50  0001 C CNN
+F 3 "~" H 5950 3400 50  0001 C CNN
+	1    5950 3400
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -379,7 +379,7 @@ Wire Wire Line
 	8300 2800 8100 2800
 Connection ~ 8100 2800
 Wire Wire Line
-	6150 1950 7800 1950
+	5950 1950 7800 1950
 Wire Wire Line
 	7550 2050 7800 2050
 Text Label 4550 4150 0    50   ~ 0
@@ -388,10 +388,10 @@ Wire Wire Line
 	5000 2800 5000 2950
 Connection ~ 5000 2800
 Wire Wire Line
-	6150 4250 6150 3600
+	5950 4250 5950 3600
 Wire Wire Line
-	4550 4250 6150 4250
-Connection ~ 6150 3600
+	4550 4250 5950 4250
+Connection ~ 5950 3600
 Wire Wire Line
 	5500 2950 5500 2800
 Connection ~ 5500 2800
@@ -501,9 +501,9 @@ $EndComp
 Wire Wire Line
 	5000 3850 4550 3850
 Wire Wire Line
-	6650 4050 4550 4050
+	6050 4050 4550 4050
 Wire Wire Line
-	7050 4050 6950 4050
+	7050 4050 6600 4050
 Connection ~ 7050 4050
 $Comp
 L power:GND #PWR0101
@@ -650,4 +650,35 @@ Text Notes 3250 6700 0    100  ~ 0
 Comms functionality
 Text Notes 7650 2500 0    50   ~ 0
 Connector appears compatible\nwith Molex PicoBlade.\nReferred to as JST1.25mm,\nalthough JST doesn’t make\nanything like it
+$Comp
+L Connector:TestPoint TP1
+U 1 1 6393EAFB
+P 6600 3600
+F 0 "TP1" H 6658 3718 50  0000 L CNN
+F 1 "TestPoint" H 6658 3627 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D2.0mm" H 6800 3600 50  0001 C CNN
+F 3 "~" H 6800 3600 50  0001 C CNN
+	1    6600 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 6393F51C
+P 6600 4000
+F 0 "TP2" H 6658 4118 50  0000 L CNN
+F 1 "TestPoint" H 6658 4027 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D2.0mm" H 6800 4000 50  0001 C CNN
+F 3 "~" H 6800 4000 50  0001 C CNN
+	1    6600 4000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 3650 7050 3650
+Wire Wire Line
+	6600 4000 6600 4050
+Connection ~ 6600 4050
+Wire Wire Line
+	6600 4050 6350 4050
+Wire Wire Line
+	6600 3600 6600 3650
 $EndSCHEMATC
