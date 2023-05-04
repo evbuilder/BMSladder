@@ -1,0 +1,28 @@
+### Module positions - created on Tuesday, April 11, 2023 at 10:41:52 PM ###
+### Printed by Pcbnew version kicad (5.1.10-1-10_14)
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val           Package                                                PosX       PosY       Rot  Side
+C1        1u            C_0603_1608Metric                                   35.3000   -26.0000  180.0000  top
+D1        Red_LED       LED_0603_1608Metric                                 57.9000   -21.3000   90.0000  top
+D2        BAV99W        SOT-323_SC-70                                       52.8000   -27.6000   90.0000  top
+J1        Conn_01x03    JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal    62.7000   -22.8000  180.0000  top
+J2        Conn_01x03    JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal    26.6000   -28.7000    0.0000  top
+Q1        MMDT3946      SOT-363_SC-70-6                                     57.4500   -27.4500  270.0000  top
+Q2        SI3402-TP     SOT-23                                              30.3000   -23.5000    0.0000  top
+Q3        MMBT3904      SOT-23                                              25.9000   -23.5000    0.0000  top
+R1        150k          R_0603_1608Metric                                   56.4000   -31.2000  180.0000  top
+R2        10R           R_0603_1608Metric                                   46.4000   -26.0000  180.0000  top
+R3        220k          R_0603_1608Metric                                   49.9000   -31.2000  180.0000  top
+R4        3K3           R_0603_1608Metric                                   49.9000   -29.7000    0.0000  top
+R5        3K3           R_0603_1608Metric                                   57.5125   -23.9000    0.0000  top
+R6        150k          R_0603_1608Metric                                   60.7000   -27.1000    0.0000  top
+R8        220k          R_0603_1608Metric                                   54.9500   -27.3500  270.0000  top
+R9        220k          R_0603_1608Metric                                   49.9000   -27.3000  180.0000  top
+R10       3K3           R_0603_1608Metric                                   32.0000   -26.0000  180.0000  top
+R11       220k          R_0603_1608Metric                                   30.3000   -20.8000  180.0000  top
+R12       150k          R_0603_1608Metric                                   22.1000   -21.6000   90.0000  top
+R13       270k          R_0603_1608Metric                                   25.8000   -20.8000    0.0000  top
+U1        TL431DBZ      SOT-23                                              46.4000   -29.7000   90.0000  top
+U2        ATtiny202-SS  SOIC-8_3.9x4.9mm_P1.27mm                            40.7000   -27.9500    0.0000  top
+## End
