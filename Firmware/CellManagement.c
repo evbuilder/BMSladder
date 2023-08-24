@@ -4,8 +4,8 @@
 #include "adc.h"
 #include "HardwareDefines.h"
 
-#define OVERVOLTAGE_THRESHOLD_MILLIVOLTS 4150
-#define BALANCE_THRESHOLD_MILLIVOLTS 4050
+#define OVERVOLTAGE_THRESHOLD_MILLIVOLTS 3650   //4150
+#define BALANCE_THRESHOLD_MILLIVOLTS 3550       //4050
 #define UNDERVOLTAGE_THRESHOLD_MILLIVOLTS 2800
 
 /* 
@@ -21,7 +21,8 @@ inline void BalanceOn(bool highCurrent)
 {
 	if (highCurrent)
 	{
-		TCA0_SINGLE_CMP0 = 768; //75% duty cycle on the balance FET, period around 80ms
+		TCA0_SINGLE_CMP0 = 357; //768; //75% duty cycle on the balance FET, period around 80ms
+		// 300mA @ 4.05V 4.05V/4.7R=0.862A, 0.3/0.862=0.348, 0.348*1024=357
 	}
 	TCA0_SINGLE_CTRLA |= TCA_SINGLE_ENABLE_bm;
 }

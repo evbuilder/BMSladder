@@ -3,29 +3,29 @@ BMSLadder.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00803f80  00803f80  00000336  2**0
+  0 .data         00000000  00803f80  00803f80  00000348  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000002e2  00000000  00000000  00000054  2**1
+  1 .text         000002f4  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000336  2**0
+  2 .comment      00000030  00000000  00000000  00000348  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000368  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000378  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000d0  00000000  00000000  000003a4  2**0
+  4 .debug_aranges 000000d0  00000000  00000000  000003b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00001e0c  00000000  00000000  00000474  2**0
+  5 .debug_info   00001e35  00000000  00000000  00000484  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00001593  00000000  00000000  00002280  2**0
+  6 .debug_abbrev 000015ad  00000000  00000000  000022b9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000007a3  00000000  00000000  00003813  2**0
+  7 .debug_line   000007c3  00000000  00000000  00003866  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  0000017c  00000000  00000000  00003fb8  2**2
+  8 .debug_frame  0000017c  00000000  00000000  0000402c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000011ec  00000000  00000000  00004134  2**0
+  9 .debug_str    00001227  00000000  00000000  000041a8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000002b3  00000000  00000000  00005320  2**0
+ 10 .debug_loc    000002d1  00000000  00000000  000053cf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000a0  00000000  00000000  000055d3  2**0
+ 11 .debug_ranges 000000a0  00000000  00000000  000056a0  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,54 +65,31 @@ Disassembly of section .text:
   3a:	cd bf       	out	0x3d, r28	; 61
   3c:	df e3       	ldi	r29, 0x3F	; 63
   3e:	de bf       	out	0x3e, r29	; 62
-  40:	df d0       	rcall	.+446    	; 0x200 <main>
-  42:	4d c1       	rjmp	.+666    	; 0x2de <_exit>
+  40:	e2 d0       	rcall	.+452    	; 0x206 <main>
+  42:	56 c1       	rjmp	.+684    	; 0x2f0 <_exit>
 
 00000044 <__bad_interrupt>:
   44:	dd cf       	rjmp	.-70     	; 0x0 <__vectors>
 
 00000046 <ADC0Init>:
-#include "adc.h"
-
-void ADC0Init()
-{
-
-	ADC0.CTRLC = ADC_PRESC_DIV4_gc      /* CLK_PER divided by 4 */
   46:	e0 e0       	ldi	r30, 0x00	; 0
   48:	f6 e0       	ldi	r31, 0x06	; 6
   4a:	81 e5       	ldi	r24, 0x51	; 81
   4c:	82 83       	std	Z+2, r24	; 0x02
-				 | ADC_REFSEL_VDDREF_gc /* VDD Reference */
-	             | (1 << ADC_SAMPCAP_bp); /* Sample Capacitance Selection: enabled for reference higher than 1V */
-
-
-	ADC0.CTRLA = 1 << ADC_ENABLE_bp     /* ADC Enable: enabled */
   4e:	81 e0       	ldi	r24, 0x01	; 1
   50:	80 83       	st	Z, r24
   52:	08 95       	ret
 
 00000054 <InternalReferenceInit>:
-	             | 0 << ADC_RUNSTBY_bp; /* Run standby mode: disabled */
-}
-
-void InternalReferenceInit()
-{
-	VREF.CTRLA = VREF_ADC0REFSEL_1V1_gc;
   54:	e0 ea       	ldi	r30, 0xA0	; 160
   56:	f0 e0       	ldi	r31, 0x00	; 0
   58:	80 e1       	ldi	r24, 0x10	; 16
   5a:	80 83       	st	Z, r24
-	VREF.CTRLB = VREF_ADC0REFEN_bm; //Enable reference, even if nothing is requesting it.
   5c:	82 e0       	ldi	r24, 0x02	; 2
   5e:	81 83       	std	Z+1, r24	; 0x01
   60:	08 95       	ret
 
 00000062 <ADC0Enable>:
-}
-
-void ADC0Enable()
-{
-	ADC0.CTRLA |= ADC_ENABLE_bm;
   62:	e0 e0       	ldi	r30, 0x00	; 0
   64:	f6 e0       	ldi	r31, 0x06	; 6
   66:	80 81       	ld	r24, Z
@@ -121,11 +98,6 @@ void ADC0Enable()
   6c:	08 95       	ret
 
 0000006e <ADC0Disable>:
-}
-
-void ADC0Disable()
-{
-	ADC0.CTRLA &= ~ADC_ENABLE_bm;
   6e:	e0 e0       	ldi	r30, 0x00	; 0
   70:	f6 e0       	ldi	r31, 0x06	; 6
   72:	80 81       	ld	r24, Z
@@ -134,64 +106,34 @@ void ADC0Disable()
   78:	08 95       	ret
 
 0000007a <ADC0StartConversion>:
-}
-
-void ADC0StartConversion(adc_0_channel_t channel)
-{
-	ADC0.MUXPOS  = channel;
   7a:	e0 e0       	ldi	r30, 0x00	; 0
   7c:	f6 e0       	ldi	r31, 0x06	; 6
   7e:	86 83       	std	Z+6, r24	; 0x06
-	ADC0.COMMAND = ADC_STCONV_bm;
   80:	81 e0       	ldi	r24, 0x01	; 1
   82:	80 87       	std	Z+8, r24	; 0x08
   84:	08 95       	ret
 
 00000086 <ADC0ConversionDone>:
-}
-
-bool ADC0ConversionDone()
-{
-	return (ADC0.INTFLAGS & ADC_RESRDY_bm);
   86:	80 91 0b 06 	lds	r24, 0x060B	; 0x80060b <__RODATA_PM_OFFSET__+0x7f860b>
-}
   8a:	81 70       	andi	r24, 0x01	; 1
   8c:	08 95       	ret
 
 0000008e <ADC0GetConversionResult>:
-
-adc_result_t ADC0GetConversionResult(void)
-{
-	return (ADC0.RES);
   8e:	80 91 10 06 	lds	r24, 0x0610	; 0x800610 <__RODATA_PM_OFFSET__+0x7f8610>
   92:	90 91 11 06 	lds	r25, 0x0611	; 0x800611 <__RODATA_PM_OFFSET__+0x7f8611>
-}
   96:	08 95       	ret
 
 00000098 <ADC0GetConversion>:
-
-adc_result_t ADC0GetConversion(adc_0_channel_t channel)
-{
-	adc_result_t res;
-
-	ADC0StartConversion(channel);
   98:	f0 df       	rcall	.-32     	; 0x7a <ADC0StartConversion>
-	while (!ADC0ConversionDone())
   9a:	f5 df       	rcall	.-22     	; 0x86 <ADC0ConversionDone>
   9c:	88 23       	and	r24, r24
   9e:	e9 f3       	breq	.-6      	; 0x9a <ADC0GetConversion+0x2>
-	{
-	}
-	res = ADC0GetConversionResult();
   a0:	f6 df       	rcall	.-20     	; 0x8e <ADC0GetConversionResult>
-	ADC0.INTFLAGS |= ADC_RESRDY_bm;
   a2:	e0 e0       	ldi	r30, 0x00	; 0
   a4:	f6 e0       	ldi	r31, 0x06	; 6
   a6:	23 85       	ldd	r18, Z+11	; 0x0b
   a8:	21 60       	ori	r18, 0x01	; 1
   aa:	23 87       	std	Z+11, r18	; 0x0b
-	return res;
-}
   ac:	08 95       	ret
 
 000000ae <CellVoltage>:
@@ -229,7 +171,7 @@ uint32_t CellVoltage(void)
   cc:	70 e3       	ldi	r23, 0x30	; 48
   ce:	81 e1       	ldi	r24, 0x11	; 17
   d0:	90 e0       	ldi	r25, 0x00	; 0
-  d2:	c7 d0       	rcall	.+398    	; 0x262 <__divmodsi4>
+  d2:	d0 d0       	rcall	.+416    	; 0x274 <__divmodsi4>
   d4:	69 01       	movw	r12, r18
   d6:	7a 01       	movw	r14, r20
 	ADC0Disable();
@@ -259,8 +201,8 @@ cellStatus_t ManageCell(uint32_t* cellVoltage)
   f6:	9b 83       	std	Y+3, r25	; 0x03
 
 	if (*cellVoltage >= OVERVOLTAGE_THRESHOLD_MILLIVOLTS)
-  f8:	66 33       	cpi	r22, 0x36	; 54
-  fa:	20 e1       	ldi	r18, 0x10	; 16
+  f8:	62 34       	cpi	r22, 0x42	; 66
+  fa:	2e e0       	ldi	r18, 0x0E	; 14
   fc:	72 07       	cpc	r23, r18
   fe:	81 05       	cpc	r24, r1
  100:	91 05       	cpc	r25, r1
@@ -270,11 +212,12 @@ inline void BalanceOn(bool highCurrent)
 {
 	if (highCurrent)
 	{
-		TCA0_SINGLE_CMP0 = 768; //75% duty cycle on the balance FET, period around 80ms
- 104:	80 e0       	ldi	r24, 0x00	; 0
- 106:	93 e0       	ldi	r25, 0x03	; 3
+		TCA0_SINGLE_CMP0 = 357; //768; //75% duty cycle on the balance FET, period around 80ms
+ 104:	85 e6       	ldi	r24, 0x65	; 101
+ 106:	91 e0       	ldi	r25, 0x01	; 1
  108:	80 93 28 0a 	sts	0x0A28, r24	; 0x800a28 <__RODATA_PM_OFFSET__+0x7f8a28>
  10c:	90 93 29 0a 	sts	0x0A29, r25	; 0x800a29 <__RODATA_PM_OFFSET__+0x7f8a29>
+		// 300mA @ 4.05V 4.05V/4.7R=0.862A, 0.3/0.862=0.348, 0.348*1024=357
 	}
 	TCA0_SINGLE_CTRLA |= TCA_SINGLE_ENABLE_bm;
  110:	e0 e0       	ldi	r30, 0x00	; 0
@@ -293,15 +236,15 @@ inline void BalanceOn(bool highCurrent)
 	}
 
 	if (*cellVoltage >= BALANCE_THRESHOLD_MILLIVOLTS)
- 11e:	62 3d       	cpi	r22, 0xD2	; 210
- 120:	7f 40       	sbci	r23, 0x0F	; 15
+ 11e:	6e 3d       	cpi	r22, 0xDE	; 222
+ 120:	7d 40       	sbci	r23, 0x0D	; 13
  122:	81 05       	cpc	r24, r1
  124:	91 05       	cpc	r25, r1
  126:	38 f0       	brcs	.+14     	; 0x136 <ManageCell+0x4e>
-{
 	if (highCurrent)
 	{
-		TCA0_SINGLE_CMP0 = 768; //75% duty cycle on the balance FET, period around 80ms
+		TCA0_SINGLE_CMP0 = 357; //768; //75% duty cycle on the balance FET, period around 80ms
+		// 300mA @ 4.05V 4.05V/4.7R=0.862A, 0.3/0.862=0.348, 0.348*1024=357
 	}
 	TCA0_SINGLE_CTRLA |= TCA_SINGLE_ENABLE_bm;
  128:	e0 e0       	ldi	r30, 0x00	; 0
@@ -428,299 +371,319 @@ void SleepIdle(void)
 
 000001b4 <ConfigureFaultOutput>:
 
-void ConfigureFaultOutput(void)
+bool ConfigureFaultOutput(void)
 {
 	//Check the reset source, if it was a WDT, configure the Fault pin as GPIO output, if it was a POR we don't want to do this.
 	//This gives us 8 seconds after connecting power to the board to be able to reprogram the device.
 	if (RSTCTRL_RSTFR & RSTCTRL_WDRF_bm)
  1b4:	80 91 40 00 	lds	r24, 0x0040	; 0x800040 <__RODATA_PM_OFFSET__+0x7f8040>
  1b8:	83 ff       	sbrs	r24, 3
- 1ba:	03 c0       	rjmp	.+6      	; 0x1c2 <ConfigureFaultOutput+0xe>
+ 1ba:	05 c0       	rjmp	.+10     	; 0x1c6 <ConfigureFaultOutput+0x12>
 	{
 		PORTA_DIRSET = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
  1bc:	84 e0       	ldi	r24, 0x04	; 4
  1be:	80 93 01 04 	sts	0x0401, r24	; 0x800401 <__RODATA_PM_OFFSET__+0x7f8401>
- 1c2:	08 95       	ret
-
-000001c4 <FlashLed>:
+		return true;
+ 1c2:	81 e0       	ldi	r24, 0x01	; 1
+ 1c4:	08 95       	ret
 	}
+	return false;
+ 1c6:	80 e0       	ldi	r24, 0x00	; 0
 }
+ 1c8:	08 95       	ret
+
+000001ca <FlashLed>:
 
 void FlashLed(uint8_t numFlashes)
 {
 	while (numFlashes--)
- 1c4:	18 c0       	rjmp	.+48     	; 0x1f6 <FlashLed+0x32>
+ 1ca:	18 c0       	rjmp	.+48     	; 0x1fc <FlashLed+0x32>
 	PORTA_OUTSET = TX_LED_PIN_MASK;
 }
 
 inline void ResetWatchdog(void)
 {
 	asm volatile(
- 1c6:	a8 95       	wdr
+ 1cc:	a8 95       	wdr
 	PORTA_OUTCLR = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
 }
 
 inline void LedOn(void)
 {
 	PORTA_OUTCLR = TX_LED_PIN_MASK;
- 1c8:	80 e4       	ldi	r24, 0x40	; 64
- 1ca:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
+ 1ce:	80 e4       	ldi	r24, 0x40	; 64
+ 1d0:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 1ce:	ef e1       	ldi	r30, 0x1F	; 31
- 1d0:	f3 e0       	ldi	r31, 0x03	; 3
- 1d2:	31 97       	sbiw	r30, 0x01	; 1
- 1d4:	f1 f7       	brne	.-4      	; 0x1d2 <FlashLed+0xe>
- 1d6:	00 c0       	rjmp	.+0      	; 0x1d8 <FlashLed+0x14>
- 1d8:	00 00       	nop
+ 1d4:	ef e1       	ldi	r30, 0x1F	; 31
+ 1d6:	f3 e0       	ldi	r31, 0x03	; 3
+ 1d8:	31 97       	sbiw	r30, 0x01	; 1
+ 1da:	f1 f7       	brne	.-4      	; 0x1d8 <FlashLed+0xe>
+ 1dc:	00 c0       	rjmp	.+0      	; 0x1de <FlashLed+0x14>
+ 1de:	00 00       	nop
 }
 
 inline void LedOff(void)
 {
 	PORTA_OUTSET = TX_LED_PIN_MASK;
- 1da:	80 93 05 04 	sts	0x0405, r24	; 0x800405 <__RODATA_PM_OFFSET__+0x7f8405>
+ 1e0:	80 93 05 04 	sts	0x0405, r24	; 0x800405 <__RODATA_PM_OFFSET__+0x7f8405>
 	{
 		ResetWatchdog();
 		LedOn();
 		_delay_ms(1);
 		LedOff();
 		if (numFlashes)
- 1de:	99 23       	and	r25, r25
- 1e0:	49 f0       	breq	.+18     	; 0x1f4 <FlashLed+0x30>
- 1e2:	ff ef       	ldi	r31, 0xFF	; 255
- 1e4:	21 ee       	ldi	r18, 0xE1	; 225
- 1e6:	34 e0       	ldi	r19, 0x04	; 4
- 1e8:	f1 50       	subi	r31, 0x01	; 1
- 1ea:	20 40       	sbci	r18, 0x00	; 0
- 1ec:	30 40       	sbci	r19, 0x00	; 0
- 1ee:	e1 f7       	brne	.-8      	; 0x1e8 <FlashLed+0x24>
- 1f0:	00 c0       	rjmp	.+0      	; 0x1f2 <FlashLed+0x2e>
- 1f2:	00 00       	nop
- 1f4:	89 2f       	mov	r24, r25
-	}
+ 1e4:	99 23       	and	r25, r25
+ 1e6:	49 f0       	breq	.+18     	; 0x1fa <FlashLed+0x30>
+ 1e8:	ff ef       	ldi	r31, 0xFF	; 255
+ 1ea:	21 ee       	ldi	r18, 0xE1	; 225
+ 1ec:	34 e0       	ldi	r19, 0x04	; 4
+ 1ee:	f1 50       	subi	r31, 0x01	; 1
+ 1f0:	20 40       	sbci	r18, 0x00	; 0
+ 1f2:	30 40       	sbci	r19, 0x00	; 0
+ 1f4:	e1 f7       	brne	.-8      	; 0x1ee <FlashLed+0x24>
+ 1f6:	00 c0       	rjmp	.+0      	; 0x1f8 <FlashLed+0x2e>
+ 1f8:	00 00       	nop
+ 1fa:	89 2f       	mov	r24, r25
+	return false;
 }
 
 void FlashLed(uint8_t numFlashes)
 {
 	while (numFlashes--)
- 1f6:	9f ef       	ldi	r25, 0xFF	; 255
- 1f8:	98 0f       	add	r25, r24
- 1fa:	81 11       	cpse	r24, r1
- 1fc:	e4 cf       	rjmp	.-56     	; 0x1c6 <FlashLed+0x2>
+ 1fc:	9f ef       	ldi	r25, 0xFF	; 255
+ 1fe:	98 0f       	add	r25, r24
+ 200:	81 11       	cpse	r24, r1
+ 202:	e4 cf       	rjmp	.-56     	; 0x1cc <FlashLed+0x2>
 		if (numFlashes)
 		{
 			_delay_ms(500);
 		}
 	}
 }
- 1fe:	08 95       	ret
+ 204:	08 95       	ret
 
-00000200 <main>:
+00000206 <main>:
 	//_delay_ms(2000);
 	//FlashLed(remainder);
 //}
 
 int main(void)
 {
- 200:	cf 93       	push	r28
- 202:	df 93       	push	r29
- 204:	00 d0       	rcall	.+0      	; 0x206 <main+0x6>
- 206:	00 d0       	rcall	.+0      	; 0x208 <main+0x8>
- 208:	cd b7       	in	r28, 0x3d	; 61
- 20a:	de b7       	in	r29, 0x3e	; 62
+ 206:	cf 93       	push	r28
+ 208:	df 93       	push	r29
+ 20a:	00 d0       	rcall	.+0      	; 0x20c <main+0x6>
+ 20c:	00 d0       	rcall	.+0      	; 0x20e <main+0x8>
+ 20e:	cd b7       	in	r28, 0x3d	; 61
+ 210:	de b7       	in	r29, 0x3e	; 62
 	PORTA_OUTSET = TX_LED_PIN_MASK;
 }
 
 inline void ResetWatchdog(void)
 {
 	asm volatile(
- 20c:	a8 95       	wdr
+ 212:	a8 95       	wdr
 //}
 
 int main(void)
 {
 	ResetWatchdog();
 	InitializeIO();
- 20e:	a9 df       	rcall	.-174    	; 0x162 <InitializeIO>
+ 214:	a6 df       	rcall	.-180    	; 0x162 <InitializeIO>
 	InitializeBalancePWM();
- 210:	b2 df       	rcall	.-156    	; 0x176 <InitializeBalancePWM>
-	ConfigureFaultOutput();
- 212:	d0 df       	rcall	.-96     	; 0x1b4 <ConfigureFaultOutput>
-	
-	uint32_t cellVoltage;	
-	cellStatus_t cellStatus = ManageCell(&cellVoltage);
- 214:	ce 01       	movw	r24, r28
- 216:	01 96       	adiw	r24, 0x01	; 1
- 218:	67 df       	rcall	.-306    	; 0xe8 <ManageCell>
-
-	switch (cellStatus)
- 21a:	82 30       	cpi	r24, 0x02	; 2
- 21c:	69 f0       	breq	.+26     	; 0x238 <main+0x38>
- 21e:	83 30       	cpi	r24, 0x03	; 3
- 220:	19 f0       	breq	.+6      	; 0x228 <main+0x28>
- 222:	81 30       	cpi	r24, 0x01	; 1
- 224:	a9 f4       	brne	.+42     	; 0x250 <main+0x50>
- 226:	0f c0       	rjmp	.+30     	; 0x246 <main+0x46>
-	TCA0_SINGLE_CTRLC = 0;
-}
-
-inline void IndicateFault(void)
-{
-	PORTA_OUTSET = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
- 228:	84 e0       	ldi	r24, 0x04	; 4
- 22a:	80 93 05 04 	sts	0x0405, r24	; 0x800405 <__RODATA_PM_OFFSET__+0x7f8405>
+ 216:	af df       	rcall	.-162    	; 0x176 <InitializeBalancePWM>
+	bool wasWatchdog = ConfigureFaultOutput();
+ 218:	cd df       	rcall	.-102    	; 0x1b4 <ConfigureFaultOutput>
+	if(!wasWatchdog)
+ 21a:	81 11       	cpse	r24, r1
+ 21c:	04 c0       	rjmp	.+8      	; 0x226 <main+0x20>
 	PORTA_OUTCLR = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
 }
 
 inline void LedOn(void)
 {
 	PORTA_OUTCLR = TX_LED_PIN_MASK;
- 22e:	80 e4       	ldi	r24, 0x40	; 64
- 230:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
+ 21e:	80 e4       	ldi	r24, 0x40	; 64
+ 220:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
+ 224:	ff cf       	rjmp	.-2      	; 0x224 <main+0x1e>
+		LedOn();
+		while(1);
+	}
+	
+	uint32_t cellVoltage;	
+	cellStatus_t cellStatus = ManageCell(&cellVoltage);
+ 226:	ce 01       	movw	r24, r28
+ 228:	01 96       	adiw	r24, 0x01	; 1
+ 22a:	5e df       	rcall	.-324    	; 0xe8 <ManageCell>
+
 	switch (cellStatus)
-	{
-		case CellStatusOverVoltage:
-			IndicateFault();
-			LedOn();
-			SleepIdle();
- 234:	ba df       	rcall	.-140    	; 0x1aa <SleepIdle>
-			break;
- 236:	0c c0       	rjmp	.+24     	; 0x250 <main+0x50>
+ 22c:	82 30       	cpi	r24, 0x02	; 2
+ 22e:	69 f0       	breq	.+26     	; 0x24a <main+0x44>
+ 230:	83 30       	cpi	r24, 0x03	; 3
+ 232:	19 f0       	breq	.+6      	; 0x23a <main+0x34>
+ 234:	81 30       	cpi	r24, 0x01	; 1
+ 236:	a9 f4       	brne	.+42     	; 0x262 <main+0x5c>
+ 238:	0f c0       	rjmp	.+30     	; 0x258 <main+0x52>
 	TCA0_SINGLE_CTRLC = 0;
 }
 
 inline void IndicateFault(void)
 {
 	PORTA_OUTSET = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
- 238:	84 e0       	ldi	r24, 0x04	; 4
- 23a:	80 93 05 04 	sts	0x0405, r24	; 0x800405 <__RODATA_PM_OFFSET__+0x7f8405>
+ 23a:	84 e0       	ldi	r24, 0x04	; 4
+ 23c:	80 93 05 04 	sts	0x0405, r24	; 0x800405 <__RODATA_PM_OFFSET__+0x7f8405>
+	PORTA_OUTCLR = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
+}
+
+inline void LedOn(void)
+{
+	PORTA_OUTCLR = TX_LED_PIN_MASK;
+ 240:	80 e4       	ldi	r24, 0x40	; 64
+ 242:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
+	switch (cellStatus)
+	{
+		case CellStatusOverVoltage:
+			IndicateFault();
+			LedOn();
+			SleepIdle();
+ 246:	b1 df       	rcall	.-158    	; 0x1aa <SleepIdle>
+			break;
+ 248:	0c c0       	rjmp	.+24     	; 0x262 <main+0x5c>
+	TCA0_SINGLE_CTRLC = 0;
+}
+
+inline void IndicateFault(void)
+{
+	PORTA_OUTSET = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
+ 24a:	84 e0       	ldi	r24, 0x04	; 4
+ 24c:	80 93 05 04 	sts	0x0405, r24	; 0x800405 <__RODATA_PM_OFFSET__+0x7f8405>
 			SleepIdle();
 			break;
 		case CellStatusBalancing:
 			//IndicateNoFault();
 			IndicateFault(); //Fault output is going to be used to switch from CC to CV charge, so we want it high as soon as the first cell starts balancing
 			FlashLed(2);
- 23e:	82 e0       	ldi	r24, 0x02	; 2
- 240:	c1 df       	rcall	.-126    	; 0x1c4 <FlashLed>
+ 250:	82 e0       	ldi	r24, 0x02	; 2
+ 252:	bb df       	rcall	.-138    	; 0x1ca <FlashLed>
 			SleepIdle();
- 242:	b3 df       	rcall	.-154    	; 0x1aa <SleepIdle>
+ 254:	aa df       	rcall	.-172    	; 0x1aa <SleepIdle>
 			break;
- 244:	05 c0       	rjmp	.+10     	; 0x250 <main+0x50>
+ 256:	05 c0       	rjmp	.+10     	; 0x262 <main+0x5c>
 	PORTA_OUTSET = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
 }
 
 inline void IndicateNoFault(void)
 {
 	PORTA_OUTCLR = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
- 246:	84 e0       	ldi	r24, 0x04	; 4
- 248:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
+ 258:	84 e0       	ldi	r24, 0x04	; 4
+ 25a:	80 93 06 04 	sts	0x0406, r24	; 0x800406 <__RODATA_PM_OFFSET__+0x7f8406>
 			FlashLed(2);
 			SleepIdle();
 			break;
 		case CellStatusNormal:
 			IndicateNoFault();
 			FlashLed(1);
- 24c:	81 e0       	ldi	r24, 0x01	; 1
- 24e:	ba df       	rcall	.-140    	; 0x1c4 <FlashLed>
+ 25e:	81 e0       	ldi	r24, 0x01	; 1
+ 260:	b4 df       	rcall	.-152    	; 0x1ca <FlashLed>
 		case CellStatusUnderVoltage:
 			//IndicateFault(); //Fault output is going to be used as a "overcharge indicator", so don't output fault condition for lower limit
 			break;
 	}
 
 	SleepDeep();
- 250:	a7 df       	rcall	.-178    	; 0x1a0 <SleepDeep>
+ 262:	9e df       	rcall	.-196    	; 0x1a0 <SleepDeep>
 }
- 252:	80 e0       	ldi	r24, 0x00	; 0
- 254:	90 e0       	ldi	r25, 0x00	; 0
- 256:	24 96       	adiw	r28, 0x04	; 4
- 258:	cd bf       	out	0x3d, r28	; 61
- 25a:	de bf       	out	0x3e, r29	; 62
- 25c:	df 91       	pop	r29
- 25e:	cf 91       	pop	r28
- 260:	08 95       	ret
+ 264:	80 e0       	ldi	r24, 0x00	; 0
+ 266:	90 e0       	ldi	r25, 0x00	; 0
+ 268:	24 96       	adiw	r28, 0x04	; 4
+ 26a:	cd bf       	out	0x3d, r28	; 61
+ 26c:	de bf       	out	0x3e, r29	; 62
+ 26e:	df 91       	pop	r29
+ 270:	cf 91       	pop	r28
+ 272:	08 95       	ret
 
-00000262 <__divmodsi4>:
- 262:	05 2e       	mov	r0, r21
- 264:	97 fb       	bst	r25, 7
- 266:	16 f4       	brtc	.+4      	; 0x26c <__divmodsi4+0xa>
- 268:	00 94       	com	r0
- 26a:	0f d0       	rcall	.+30     	; 0x28a <__negsi2>
- 26c:	57 fd       	sbrc	r21, 7
- 26e:	05 d0       	rcall	.+10     	; 0x27a <__divmodsi4_neg2>
- 270:	14 d0       	rcall	.+40     	; 0x29a <__udivmodsi4>
- 272:	07 fc       	sbrc	r0, 7
- 274:	02 d0       	rcall	.+4      	; 0x27a <__divmodsi4_neg2>
- 276:	46 f4       	brtc	.+16     	; 0x288 <__divmodsi4_exit>
- 278:	08 c0       	rjmp	.+16     	; 0x28a <__negsi2>
+00000274 <__divmodsi4>:
+ 274:	05 2e       	mov	r0, r21
+ 276:	97 fb       	bst	r25, 7
+ 278:	16 f4       	brtc	.+4      	; 0x27e <__divmodsi4+0xa>
+ 27a:	00 94       	com	r0
+ 27c:	0f d0       	rcall	.+30     	; 0x29c <__negsi2>
+ 27e:	57 fd       	sbrc	r21, 7
+ 280:	05 d0       	rcall	.+10     	; 0x28c <__divmodsi4_neg2>
+ 282:	14 d0       	rcall	.+40     	; 0x2ac <__udivmodsi4>
+ 284:	07 fc       	sbrc	r0, 7
+ 286:	02 d0       	rcall	.+4      	; 0x28c <__divmodsi4_neg2>
+ 288:	46 f4       	brtc	.+16     	; 0x29a <__divmodsi4_exit>
+ 28a:	08 c0       	rjmp	.+16     	; 0x29c <__negsi2>
 
-0000027a <__divmodsi4_neg2>:
- 27a:	50 95       	com	r21
- 27c:	40 95       	com	r20
- 27e:	30 95       	com	r19
- 280:	21 95       	neg	r18
- 282:	3f 4f       	sbci	r19, 0xFF	; 255
- 284:	4f 4f       	sbci	r20, 0xFF	; 255
- 286:	5f 4f       	sbci	r21, 0xFF	; 255
+0000028c <__divmodsi4_neg2>:
+ 28c:	50 95       	com	r21
+ 28e:	40 95       	com	r20
+ 290:	30 95       	com	r19
+ 292:	21 95       	neg	r18
+ 294:	3f 4f       	sbci	r19, 0xFF	; 255
+ 296:	4f 4f       	sbci	r20, 0xFF	; 255
+ 298:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000288 <__divmodsi4_exit>:
- 288:	08 95       	ret
+0000029a <__divmodsi4_exit>:
+ 29a:	08 95       	ret
 
-0000028a <__negsi2>:
- 28a:	90 95       	com	r25
- 28c:	80 95       	com	r24
- 28e:	70 95       	com	r23
- 290:	61 95       	neg	r22
- 292:	7f 4f       	sbci	r23, 0xFF	; 255
- 294:	8f 4f       	sbci	r24, 0xFF	; 255
- 296:	9f 4f       	sbci	r25, 0xFF	; 255
- 298:	08 95       	ret
+0000029c <__negsi2>:
+ 29c:	90 95       	com	r25
+ 29e:	80 95       	com	r24
+ 2a0:	70 95       	com	r23
+ 2a2:	61 95       	neg	r22
+ 2a4:	7f 4f       	sbci	r23, 0xFF	; 255
+ 2a6:	8f 4f       	sbci	r24, 0xFF	; 255
+ 2a8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 2aa:	08 95       	ret
 
-0000029a <__udivmodsi4>:
- 29a:	a1 e2       	ldi	r26, 0x21	; 33
- 29c:	1a 2e       	mov	r1, r26
- 29e:	aa 1b       	sub	r26, r26
- 2a0:	bb 1b       	sub	r27, r27
- 2a2:	fd 01       	movw	r30, r26
- 2a4:	0d c0       	rjmp	.+26     	; 0x2c0 <__udivmodsi4_ep>
+000002ac <__udivmodsi4>:
+ 2ac:	a1 e2       	ldi	r26, 0x21	; 33
+ 2ae:	1a 2e       	mov	r1, r26
+ 2b0:	aa 1b       	sub	r26, r26
+ 2b2:	bb 1b       	sub	r27, r27
+ 2b4:	fd 01       	movw	r30, r26
+ 2b6:	0d c0       	rjmp	.+26     	; 0x2d2 <__udivmodsi4_ep>
 
-000002a6 <__udivmodsi4_loop>:
- 2a6:	aa 1f       	adc	r26, r26
- 2a8:	bb 1f       	adc	r27, r27
- 2aa:	ee 1f       	adc	r30, r30
- 2ac:	ff 1f       	adc	r31, r31
- 2ae:	a2 17       	cp	r26, r18
- 2b0:	b3 07       	cpc	r27, r19
- 2b2:	e4 07       	cpc	r30, r20
- 2b4:	f5 07       	cpc	r31, r21
- 2b6:	20 f0       	brcs	.+8      	; 0x2c0 <__udivmodsi4_ep>
- 2b8:	a2 1b       	sub	r26, r18
- 2ba:	b3 0b       	sbc	r27, r19
- 2bc:	e4 0b       	sbc	r30, r20
- 2be:	f5 0b       	sbc	r31, r21
+000002b8 <__udivmodsi4_loop>:
+ 2b8:	aa 1f       	adc	r26, r26
+ 2ba:	bb 1f       	adc	r27, r27
+ 2bc:	ee 1f       	adc	r30, r30
+ 2be:	ff 1f       	adc	r31, r31
+ 2c0:	a2 17       	cp	r26, r18
+ 2c2:	b3 07       	cpc	r27, r19
+ 2c4:	e4 07       	cpc	r30, r20
+ 2c6:	f5 07       	cpc	r31, r21
+ 2c8:	20 f0       	brcs	.+8      	; 0x2d2 <__udivmodsi4_ep>
+ 2ca:	a2 1b       	sub	r26, r18
+ 2cc:	b3 0b       	sbc	r27, r19
+ 2ce:	e4 0b       	sbc	r30, r20
+ 2d0:	f5 0b       	sbc	r31, r21
 
-000002c0 <__udivmodsi4_ep>:
- 2c0:	66 1f       	adc	r22, r22
- 2c2:	77 1f       	adc	r23, r23
- 2c4:	88 1f       	adc	r24, r24
- 2c6:	99 1f       	adc	r25, r25
- 2c8:	1a 94       	dec	r1
- 2ca:	69 f7       	brne	.-38     	; 0x2a6 <__udivmodsi4_loop>
- 2cc:	60 95       	com	r22
- 2ce:	70 95       	com	r23
- 2d0:	80 95       	com	r24
- 2d2:	90 95       	com	r25
- 2d4:	9b 01       	movw	r18, r22
- 2d6:	ac 01       	movw	r20, r24
- 2d8:	bd 01       	movw	r22, r26
- 2da:	cf 01       	movw	r24, r30
- 2dc:	08 95       	ret
+000002d2 <__udivmodsi4_ep>:
+ 2d2:	66 1f       	adc	r22, r22
+ 2d4:	77 1f       	adc	r23, r23
+ 2d6:	88 1f       	adc	r24, r24
+ 2d8:	99 1f       	adc	r25, r25
+ 2da:	1a 94       	dec	r1
+ 2dc:	69 f7       	brne	.-38     	; 0x2b8 <__udivmodsi4_loop>
+ 2de:	60 95       	com	r22
+ 2e0:	70 95       	com	r23
+ 2e2:	80 95       	com	r24
+ 2e4:	90 95       	com	r25
+ 2e6:	9b 01       	movw	r18, r22
+ 2e8:	ac 01       	movw	r20, r24
+ 2ea:	bd 01       	movw	r22, r26
+ 2ec:	cf 01       	movw	r24, r30
+ 2ee:	08 95       	ret
 
-000002de <_exit>:
- 2de:	f8 94       	cli
+000002f0 <_exit>:
+ 2f0:	f8 94       	cli
 
-000002e0 <__stop_program>:
- 2e0:	ff cf       	rjmp	.-2      	; 0x2e0 <__stop_program>
+000002f2 <__stop_program>:
+ 2f2:	ff cf       	rjmp	.-2      	; 0x2f2 <__stop_program>

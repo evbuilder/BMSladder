@@ -11,6 +11,7 @@
 */
 
 #include <avr/io.h>
+#include <stdbool.h>
 
 #include "CellManagement.h"
 #include "HardwareDefines.h"
@@ -77,14 +78,16 @@ void SleepIdle(void)
 	);
 }
 
-void ConfigureFaultOutput(void)
+bool ConfigureFaultOutput(void)
 {
 	//Check the reset source, if it was a WDT, configure the Fault pin as GPIO output, if it was a POR we don't want to do this.
 	//This gives us 8 seconds after connecting power to the board to be able to reprogram the device.
 	if (RSTCTRL_RSTFR & RSTCTRL_WDRF_bm)
 	{
 		PORTA_DIRSET = REF2V5_ENABLE_REPURPOSED_AS_FAULT;
+		return true;
 	}
+	return false;
 }
 
 void FlashLed(uint8_t numFlashes)
@@ -117,7 +120,12 @@ int main(void)
 	ResetWatchdog();
 	InitializeIO();
 	InitializeBalancePWM();
-	ConfigureFaultOutput();
+	bool wasWatchdog = ConfigureFaultOutput();
+	if(!wasWatchdog)
+	{
+		LedOn();
+		while(1);
+	}
 	
 	uint32_t cellVoltage;	
 	cellStatus_t cellStatus = ManageCell(&cellVoltage);
